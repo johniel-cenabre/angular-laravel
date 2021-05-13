@@ -1,0 +1,13 @@
+{
+  "name": "angular-laravel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "front": "cd angular && ng serve --open",
+    "back": "cd laravel && php artisan serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
