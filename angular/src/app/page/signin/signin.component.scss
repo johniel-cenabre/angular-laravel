@@ -1,0 +1,43 @@
+.signin {
+  padding: 100px 0;
+  display: grid;
+  justify-content: center;
+
+  & .mat-button-toggle-group {
+    padding: 0;
+    margin-bottom: 20px;
+    border: 0;
+  }
+
+  & .mat-button-toggle {
+    min-width: 120px;
+    padding: 0;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s ease-in-out;
+  }
+
+  & .mat-button-toggle-checked {
+    background: none;
+    border-bottom: 2px solid dodgerblue;
+  }
+
+  & .mat-form-field {
+    margin-bottom: 20px;
+
+    & .error-message {
+      font-size: 11px;
+      bottom: -80%;
+      left: 0;
+      position: absolute;
+      color: #e66868;
+    }
+  }
+
+  & .submit-button {
+    margin-top: 10px;
+
+    & .mat-icon {
+      margin-right: 7px;
+    }
+  }
+}

@@ -1,0 +1,109 @@
+<form class="signin" [formGroup]="form" (ngSubmit)="submit()" #ngForm="ngForm" [@fadeInOut]>
+
+  <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+    <mat-button-toggle checked (click)="changeAction('login'); ngForm.resetForm()">Login</mat-button-toggle>
+    <mat-button-toggle (click)="changeAction('register'); ngForm.resetForm()">Register</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input
+      matInput
+      formControlName="email"
+      (focus)="resetValidation()"
+    >
+    <button mat-icon-button matSuffix disabled>
+      <mat-icon>alternate_email</mat-icon>
+    </button>
+    <div
+      class="error-message"
+      *ngIf="(email?.touched || isSubmitted) && email?.errors"
+      [@slideDownUp]
+    >
+      <span *ngIf="email?.errors?.required, else invalidEmail">Please input email</span>
+      <ng-template #invalidEmail>
+        <span *ngIf="email?.errors?.email, else wrongEmail">Email must be valid</span>
+      </ng-template>
+      <ng-template #wrongEmail>
+        <span *ngIf="email?.errors?.incorrect">Incorrect email or password</span>
+      </ng-template>
+    </div>
+  </mat-form-field>
+
+  <mat-form-field [@slideDownUp]>
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      formControlName="password"
+      [type]="passwordIsHidden ? 'password' : 'text'"
+      (focus)="resetValidation()"
+    >
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="passwordIsHidden = !passwordIsHidden"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="passwordIsHidden"
+    >
+      <mat-icon>{{ passwordIsHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <div
+      class="error-message"
+      *ngIf="(password?.touched || isSubmitted) && password?.errors"
+      [@slideDownUp]
+    >
+      <span *ngIf="password?.errors?.required, else wrongPassword">Please input password</span>
+      <ng-template #wrongPassword>
+        <span *ngIf="password?.errors?.incorrect">Incorrect email or password</span>
+      </ng-template>
+    </div>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="action === 'register'" [@slideDownUp]>
+    <mat-label>Confirm Password</mat-label>
+    <input
+      matInput
+      formControlName="confirmPassword"
+      [type]="passwordIsHidden ? 'password' : 'text'"
+      (focus)="resetValidation()"
+    >
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="passwordIsHidden = !passwordIsHidden"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="passwordIsHidden"
+    >
+      <mat-icon>{{ passwordIsHidden ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <div
+      class="error-message"
+      *ngIf="(confirmPassword?.touched || isSubmitted) && confirmPassword?.errors"
+      [@slideDownUp]
+    >
+      Please confirm password
+    </div>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    class="submit-button"
+    color="primary"
+    type="submit"
+    *ngIf="action === 'login'"
+  >
+    <mat-icon [@slideDownUp]>lock_open</mat-icon>
+    <span [@fadeInOut]>Login</span>
+  </button>
+
+  <button
+    mat-raised-button
+    class="submit-button"
+    color="primary"
+    type="submit"
+    *ngIf="action === 'register'"
+  >
+    <mat-icon [@slideDownUp]>person_outline</mat-icon>
+    <span [@fadeInOut]>Register</span>
+  </button>
+</form>
