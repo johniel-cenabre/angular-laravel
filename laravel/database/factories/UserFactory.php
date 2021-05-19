@@ -23,9 +23,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'email' => $this->faker->unique()->safeEmail(),
+            'email' => 'test@test.com',
             'email_verified_at' => now(),
-            'password' => 'password', // password
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
         ];
     }
